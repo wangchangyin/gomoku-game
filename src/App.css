@@ -1,0 +1,121 @@
+/**
+ * 五子棋游戏样式
+ */
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 游戏状态显示 */
+.status {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+/* 棋盘容器 */
+.board {
+  display: flex;
+  flex-direction: column;
+  background: #deb887;
+  border: 8px solid #8b4513;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  padding: 15px;
+}
+
+/* 棋盘行 */
+.board-row {
+  display: flex;
+}
+
+/* 棋盘格子 */
+.cell {
+  width: 36px;
+  height: 36px;
+  background: #deb887;
+  border: 1px solid #8b4513;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.cell:hover {
+  background: #c9a66b;
+}
+
+/* 棋子基础样式 */
+.piece {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+/* 黑棋 */
+.piece.black {
+  background: radial-gradient(circle at 30% 30%, #555, #000);
+}
+
+/* 白棋 */
+.piece.white {
+  background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+  border: 1px solid #999;
+}
+
+/* 获胜棋子高亮 */
+.cell.winning .piece {
+  animation: pulse 0.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+/* 重新开始按钮 */
+.reset-button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.reset-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.reset-button:active {
+  transform: translateY(0);
+}
