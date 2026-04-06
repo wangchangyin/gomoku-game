@@ -7,7 +7,7 @@ import { Board } from './components/Board';
 import { useGame } from './hooks/useGame';
 
 function App() {
-  const { board, currentPlayer, gameStatus, gameResult, makeMove, resetGame } = useGame();
+  const { board, currentPlayer, gameStatus, gameResult, lastPosition, makeMove, undoMove, resetGame } = useGame();
 
   /**
    * 获取游戏状态文本
@@ -29,14 +29,22 @@ function App() {
       <Board
         board={board}
         winningLine={gameResult?.winningLine || []}
+        lastPosition={lastPosition}
         onCellClick={makeMove}
         disabled={gameStatus !== 'playing'}
       />
-      {gameStatus !== 'playing' && (
-        <button className="reset-button" onClick={resetGame}>
-          重新开始
-        </button>
-      )}
+      <div className="button-group">
+        {gameStatus === 'playing' && (
+          <button className="undo-button" onClick={undoMove}>
+            悔棋
+          </button>
+        )}
+        {gameStatus !== 'playing' && (
+          <button className="reset-button" onClick={resetGame}>
+            重新开始
+          </button>
+        )}
+      </div>
     </div>
   );
 }

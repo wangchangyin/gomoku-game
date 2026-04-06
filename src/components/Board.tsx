@@ -9,11 +9,12 @@ import { Cell } from './Cell';
 interface BoardProps {
   board: Board;
   winningLine: [number, number][];
+  lastPosition: Position | null;
   onCellClick: (position: Position) => void;
   disabled: boolean;
 }
 
-export function Board({ board, winningLine, onCellClick, disabled }: BoardProps) {
+export function Board({ board, winningLine, lastPosition, onCellClick, disabled }: BoardProps) {
   // 将获胜连线转换为Set便于快速查找
   const winningSet = useMemo(
     () => new Set(winningLine.map(([r, c]) => `${r},${c}`)),
@@ -35,6 +36,7 @@ export function Board({ board, winningLine, onCellClick, disabled }: BoardProps)
               value={board[rowIndex][colIndex]}
               onClick={() => handleCellClick(rowIndex, colIndex)}
               isWinningCell={winningSet.has(`${rowIndex},${colIndex}`)}
+              isLastMove={lastPosition?.row === rowIndex && lastPosition?.col === colIndex}
             />
           ))}
         </div>

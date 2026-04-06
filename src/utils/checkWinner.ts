@@ -3,7 +3,7 @@
  * 检查是否有五子连珠
  */
 
-import type { Board, Player, GameResult } from '../types/game';
+import type { Board, Player, GameResult, Position } from '../types/game';
 
 // 方向向量：水平、垂直、两个对角线方向
 const DIRECTIONS: [number, number][] = [
@@ -48,7 +48,40 @@ function countInDirection(
 }
 
 /**
- * 检查是否有玩家获胜
+ * 检查指定位置落子后是否获胜（优化版）
+ * 只从落子位置四周检查，而非遍历整个棋盘
+ * @param board 棋盘状态
+ * @param position 落子位置
+ * @param player 当前玩家
+ * @returns 游戏结果
+ */
+export function checkWinnerFromPosition(
+  board: Board,
+  position: Position,
+  player: Player
+): GameResult | null {
+  const { row, col } = position;
+
+  // 检查四个方向
+  for (const [dRow, dCol] of DIRECTIONS) {
+    const line = countInDirection(board, row, col, player, dRow, dCol);
+
+    // 五子连珠
+    if (line.length >= 5) {
+      // 返回前5个位置作为获胜连线
+      return {
+        winner: player,
+        winningLine: line.slice(0, 5),
+      };
+    }
+  }
+
+  return null;
+}
+
+/**
+ * 检查是否有玩家获胜（遍历整个棋盘，用于初始化检查）
+ * @deprecated 请使用 checkWinnerFromPosition 优化性能
  * @param board 棋盘状态
  * @param player 当前玩家
  * @returns 游戏结果

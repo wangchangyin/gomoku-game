@@ -83,6 +83,18 @@ h1 {
   border: 1px solid #999;
 }
 
+/* 最后一步标记 */
+.last-move-marker {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ff4444;
+  border-radius: 50%;
+  bottom: 2px;
+  right: 2px;
+  box-shadow: 0 0 4px rgba(255, 68, 68, 0.8);
+}
+
 /* 获胜棋子高亮 */
 .cell.winning .piece {
   animation: pulse 0.5s ease-in-out infinite alternate;
@@ -98,9 +110,36 @@ h1 {
   }
 }
 
+/* 按钮组 */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* 悔棋按钮 */
+.undo-button {
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  color: #fff;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.undo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.undo-button:active {
+  transform: translateY(0);
+}
+
 /* 重新开始按钮 */
 .reset-button {
-  margin-top: 20px;
   padding: 12px 30px;
   font-size: 1.2rem;
   color: #fff;
@@ -118,4 +157,41 @@ h1 {
 
 .reset-button:active {
   transform: translateY(0);
+}
+
+/* 移动端适配 */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .status {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+
+  .cell {
+    width: 24px;
+    height: 24px;
+  }
+
+  .piece {
+    width: 20px;
+    height: 20px;
+  }
+
+  .board {
+    padding: 8px;
+    border-width: 4px;
+  }
+
+  .undo-button,
+  .reset-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
 }
